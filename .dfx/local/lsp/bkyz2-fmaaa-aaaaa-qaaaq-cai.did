@@ -1,0 +1,67 @@
+type TransactionBalances = 
+ record {
+   balanceHistory: BalanceWithHistory;
+   "principal": principal;
+   profile: StudentProfile;
+ };
+type Transaction = 
+ record {
+   amount: nat;
+   date_time: int;
+   info: text;
+   sign: text;
+   status: text;
+ };
+type StudentType = 
+ record {
+   "principal": principal;
+   profile: StudentProfile;
+ };
+type StudentProfile = 
+ record {
+   email: text;
+   full_name: text;
+   program: text;
+   student_id: text;
+ };
+type Message = 
+ record {
+   msg: text;
+   mtype: text;
+ };
+type BalanceWithHistory = 
+ record {
+   balance: nat;
+   history: vec Transaction;
+ };
+type AdminProfile = 
+ record {
+   email: text;
+   full_name: text;
+ };
+service : {
+  addIncentive: (principal, nat) -> (Message);
+  addProfile: (principal, StudentProfile) -> (Message);
+  balanceOf: (principal) -> (nat) query;
+  getAdminProfile: (principal) -> (principal, AdminProfile) query;
+  getProfile: (principal) -> (principal, StudentProfile) query;
+  getSymbol: () -> (text) query;
+  historyOf: (principal) -> (vec Transaction) query;
+  isAdmin: (principal) -> (bool);
+  makeClaimedTransaction: (text, principal) -> (Message);
+  payOut: () -> (Message);
+  payoutTransfer: (principal, nat) -> (Message);
+  seeAllAdmins: () -> (vec record {
+                             principal;
+                             AdminProfile;
+                           }) query;
+  seeAllClaimedTransaction: () -> (vec record {
+                                         text;
+                                         principal;
+                                       }) query;
+  seeAllStudents: () -> (vec StudentType) query;
+  seeAllTransactions: () -> (vec TransactionBalances) query;
+  transfer: (principal, nat) -> (Message);
+  whoAmI: () -> (principal);
+  withdraw: (text, nat) -> (Message);
+}

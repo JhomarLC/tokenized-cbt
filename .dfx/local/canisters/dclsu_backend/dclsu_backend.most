@@ -1,0 +1,14 @@
+// Version: 1.0.0
+type AdminProfile = {email : Text; full_name : Text};
+type BalanceWithHistory = {balance : Nat; history : [Transaction]};
+type StudentProfile =
+  {email : Text; full_name : Text; program : Text; student_id : Text};
+type Transaction =
+  {amount : Nat; date_time : Int; info : Text; sign : Text; status : Text};
+actor {
+  stable var adminsEntries : [(Principal, AdminProfile)];
+  stable var balancesEntries : [(Principal, BalanceWithHistory)];
+  stable var claimedFreeTokenEntries : [(Principal, Bool)];
+  stable var claimedTransactionEntries : [(Text, Principal)];
+  stable var profilesEntries : [(Principal, StudentProfile)]
+};
