@@ -21,7 +21,7 @@ const Admin = () => {
   const [transactionsForApproval, setTransactionsForApproval] = useState([]);
   const [claimedTransactions, setClaimedTransactions] = useState([]);
   const [isClaiming, setIsClaiming] = useState(false);
-
+  
   const [studentSearchQuery, setStudentSearchQuery] = useState("");
   const [transactionSearchQuery, setTransactionSearchQuery] = useState("");
   const [claimedTransactionSearchQuery, setClaimedTransactionSearchQuery] = useState("");
